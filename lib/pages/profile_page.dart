@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pas_mobile_11pplg1_10/controller/auth_controller.dart';
-
+import 'package:pas_mobile_11pplg1_10/controllers/profile_controller.dart';
+import 'package:pas_mobile_11pplg1_10/widgets/widget_button.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
-  final AuthController controller = Get.put(AuthController());
+  final ProfileController controller = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
-    final user = controller.user;
 
     return Scaffold(
       appBar: AppBar(
@@ -22,22 +21,32 @@ class ProfilePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 60,
-              backgroundImage: user?.photoURL != null
-                  ? NetworkImage(user!.photoURL!)
-                  : const AssetImage("assets/profile.jpg") as ImageProvider,
+              radius: 80,
+              backgroundImage: AssetImage('aset/ambakus.jpg'), 
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             Text(
-              user?.displayName ?? "Tidak ada nama",
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              "Halo, admindhiaz",
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
-              user?.email ?? "Tidak ada email",
-              style: const TextStyle(color: Colors.grey),
+              "dhiaz12@gmail.com",
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            const SizedBox(height: 40),
-           
+            const SizedBox(height: 20),
+            CustomButton(
+              text: "Log Out",
+              textColor: Colors.red,
+              onPressed: () {
+                controller.logout();
+              },
+            ),
           ],
         ),
       ),
