@@ -1,5 +1,5 @@
-import 'package:pas_mobile_11pplg1_10/routes/routes.dart';
 import 'package:get/get.dart';
+import 'package:pas_mobile_11pplg1_10/routes/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashscreenController extends GetxController {
@@ -17,10 +17,10 @@ class SplashscreenController extends GetxController {
 
     if (token != null && token.isNotEmpty) {
       print("✅ Token ditemukan: $token");
-      Get.offAllNamed(AppRoutes.main);
+      Get.offAllNamed(AppRoutes.homepage);
     } else {
       print("⚠️ Token tidak ditemukan, kembali ke login");
-      Get.offAllNamed(AppRoutes.login);
+      Get.offAllNamed(AppRoutes.loginapi);
     }
   }
 }

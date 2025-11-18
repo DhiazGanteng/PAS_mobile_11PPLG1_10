@@ -1,14 +1,10 @@
-// To parse this JSON data, do
-//
-//     final prodakModel = prodakModelFromJson(jsonString);
-
 import 'dart:convert';
 
-List<ProdakModel> prodakModelFromJson(String str) => List<ProdakModel>.from(json.decode(str).map((x) => ProdakModel.fromJson(x)));
+List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(json.decode(str).map((x) => ProductModel.fromJson(x)));
 
-String prodakModelToJson(List<ProdakModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String productModelToJson(List<ProductModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ProdakModel {
+class ProductModel {
     int id;
     String title;
     double price;
@@ -16,8 +12,9 @@ class ProdakModel {
     Category category;
     String image;
     Rating rating;
+    bool isBookmarked;
 
-    ProdakModel({
+    ProductModel({
         required this.id,
         required this.title,
         required this.price,
@@ -25,9 +22,10 @@ class ProdakModel {
         required this.category,
         required this.image,
         required this.rating,
+        this.isBookmarked = false,
     });
 
-    factory ProdakModel.fromJson(Map<String, dynamic> json) => ProdakModel(
+    factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"],
         title: json["title"],
         price: json["price"]?.toDouble(),
@@ -35,6 +33,7 @@ class ProdakModel {
         category: categoryValues.map[json["category"]]!,
         image: json["image"],
         rating: Rating.fromJson(json["rating"]),
+        isBookmarked: json["isBookmarked"] == null ? false : json["isBookmarked"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -45,6 +44,7 @@ class ProdakModel {
         "category": categoryValues.reverse[category],
         "image": image,
         "rating": rating.toJson(),
+        "isBookmarked": isBookmarked,
     };
 }
 
